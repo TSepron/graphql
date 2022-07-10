@@ -11,6 +11,12 @@ const {
 const { ArtistService } = require('./modules/artist/services/artist.services')
 const { bandResolver } = require('./modules/band/resolvers/band.resolver')
 const { BandService } = require('./modules/band/services/band.services')
+const { 
+  favouritesResolver 
+} = require('./modules/favourites/resolvers/favourite.resolver')
+const { 
+  FavouritesService 
+} = require('./modules/favourites/services/favourite.services')
 const { genreResolver } = require('./modules/genre/resolvers/genre.resolver')
 const { GenreService } = require('./modules/genre/services/genre.services')
 const { trackResolver } = require('./modules/track/resolvers/track.resolver')
@@ -32,7 +38,8 @@ async function startGraphQLServer() {
       albumResolver,
       artistResolver,
       genreResolver,
-      userResolver
+      userResolver,
+      favouritesResolver
     ],
     csrfPrevention: true,
     cache: 'bounded',
@@ -56,7 +63,7 @@ async function startGraphQLServer() {
         albumService: new AlbumService(),
         artistService: new ArtistService(),
         genreService: new GenreService(),
-        userService: new UserService()
+        favouritesService: new FavouritesService()
       }
     },
   })

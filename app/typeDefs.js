@@ -9,5 +9,6 @@ module.exports = {
     gql`${await readFile(`${__dirname}/modules/artist/schemas/artist.graphql`)}`,
     gql`${await readFile(`${__dirname}/modules/genre/schemas/genre.graphql`)}`,
     gql`${await readFile(`${__dirname}/modules/user/schemas/user.graphql`)}`,
+    gql`${await readFile(`${__dirname}/modules/favourites/schemas/favourite.graphql`)}`,
   ])
 }
