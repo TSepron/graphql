@@ -28,4 +28,5 @@ input CreateArtistFields {
 
 type Mutation {
   createArtist(createArtistFields: CreateArtistFields!): Artist!
+  deleteArtist(artistId: ID!): Artist!
 }

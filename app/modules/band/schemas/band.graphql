@@ -30,4 +30,5 @@ input CreateBandFields {
 
 type Mutation {
   createBand(createBandFields: CreateBandFields!): Band!
+  deleteBand(bandId: ID!): Band!
 }

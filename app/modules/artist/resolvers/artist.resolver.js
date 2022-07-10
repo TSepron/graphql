@@ -13,6 +13,9 @@ const artistResolver = {
     createArtist: async (_, { createArtistFields }, { dataSources }) => {
       return dataSources.artistService.createArtist(createArtistFields)
     },
+    deleteArtist: async (_, { artistId }, { dataSources }) => {
+      return dataSources.artistService.deleteArtist(artistId)
+    },
   },
   Artist: {
     id: getId,

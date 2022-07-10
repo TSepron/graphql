@@ -13,6 +13,9 @@ const albumResolver = {
     createAlbum: async (_, { createAlbumFields }, { dataSources }) => {
       return dataSources.albumService.createAlbum(createAlbumFields)
     },
+    deleteAlbum: async (_, { albumId }, { dataSources }) => {
+      return dataSources.albumService.deleteAlbum(albumId)
+    },
   },
   Album: {
     id: getId,

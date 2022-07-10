@@ -26,4 +26,5 @@ input CreateAlbumFields {
 
 type Mutation {
   createAlbum(createAlbumFields: CreateAlbumFields!): Album!
+  deleteAlbum(albumId: ID!): Album!
 }

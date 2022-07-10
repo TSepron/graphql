@@ -1,5 +1,5 @@
 const { RESTDataSource } = require('apollo-datasource-rest')
-const { AuthenticationError } = require('apollo-server')
+const { AuthenticationError, UserInputError } = require('apollo-server')
 
 class BandService extends RESTDataSource {
   constructor() {
@@ -15,6 +15,12 @@ class BandService extends RESTDataSource {
         'Authorization', 
         `Bearer ${this.context.token}`
       )
+    }
+  }
+
+  _checkToken() {
+    if (!this.context.token) {
+      throw new AuthenticationError('you must login firstly')
     }
   }
 
@@ -45,6 +51,27 @@ class BandService extends RESTDataSource {
     )
 
     return res
+  }
+
+  async deleteBand(id) {
+    this._checkToken()
+
+    const band = await this.getBand(id)
+
+    if (band == null) {
+      throw new UserInputError(
+        'can\'t delete band which doesn\'t '
+        + 'exist, try another id'
+      )
+    }
+
+    const { deletedCount } = await this.delete(`/${id}`)
+
+    if (!deletedCount) {
+      throw new Error('something went wrong on server')
+    }
+
+    return band
   }
 }
 

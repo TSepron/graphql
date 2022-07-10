@@ -26,4 +26,5 @@ input CreateTrackFields {
 
 type Mutation {
   createTrack(createTrackFields: CreateTrackFields!): Track!
+  deleteTrack(trackId: ID!): Track!
 }

@@ -14,6 +14,9 @@ const bandResolver = {
     createBand: async (_, { createBandFields }, { dataSources }) => {
       return dataSources.bandService.createBand(createBandFields)
     },
+    deleteBand: async (_, { bandId }, { dataSources }) => {
+      return dataSources.bandService.deleteBand(bandId)
+    },
   },
   Band: {
     id: getId,

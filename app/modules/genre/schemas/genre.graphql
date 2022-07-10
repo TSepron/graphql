@@ -20,4 +20,5 @@ input CreateGenreFields {
 
 type Mutation {
   createGenre(createGenreFields: CreateGenreFields!): Genre!
+  deleteGenre(genreId: ID!): Genre!
 }
