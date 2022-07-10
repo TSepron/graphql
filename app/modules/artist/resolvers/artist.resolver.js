@@ -9,8 +9,18 @@ const artistResolver = {
       return dataSources.artistService.getArtist(id)
     },
   },
+  Mutation: {
+    createArtist: async (_, { createArtistFields }, { dataSources }) => {
+      return dataSources.artistService.createArtist(createArtistFields)
+    },
+  },
   Artist: {
     id: getId,
+    bands: async (artist, __, { dataSources }) => {
+      return artist.bandsIds.map(bandId => 
+        dataSources.bandService.getBand(bandId)
+      )
+    },
   }
 }
 

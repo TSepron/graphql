@@ -4,7 +4,7 @@ const {
 } = require('apollo-server-core')
 const httpHeadersPlugin = require("apollo-server-plugin-http-headers")
 const { albumResolver } = require('./modules/album/resolvers/album.resolver')
-const { AlbumService } = require('./modules/album/services/band.services')
+const { AlbumService } = require('./modules/album/services/album.services')
 const { 
   artistResolver 
 } = require('./modules/artist/resolvers/artist.resolver')

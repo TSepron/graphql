@@ -1,4 +1,5 @@
 const { RESTDataSource } = require('apollo-datasource-rest')
+const { AuthenticationError } = require('apollo-server')
 
 class BandService extends RESTDataSource {
   constructor() {
@@ -8,9 +9,18 @@ class BandService extends RESTDataSource {
     this.baseURL = process.env.BAND_URL
   }
 
+  willSendRequest(request) {
+    if (this.context.token) {
+      request.headers.set(
+        'Authorization', 
+        `Bearer ${this.context.token}`
+      )
+    }
+  }
+
   async getBands(limit = 5) {
     const res = await this.get('', { limit })
-    
+
     return res.items
   }
 
@@ -22,6 +32,19 @@ class BandService extends RESTDataSource {
     const res = await this.get(`/${id}`)
 
     return res || null
+  }
+
+  async createBand(fields) {
+    if (!this.context.token) {
+      throw new AuthenticationError('you must login firstly')
+    }
+
+    const res = await this.post(
+      '', // path
+      fields, // request body
+    )
+
+    return res
   }
 }
 

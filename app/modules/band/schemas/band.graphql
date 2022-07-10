@@ -1,8 +1,12 @@
+type Member {
+  artist: Artist
+}
+
 type Band {
     id: ID!
     name: String
     origin: String
-    members: [Artist]
+    members: [Member]
     website: String
     genres: [Genre]
 }
@@ -10,4 +14,20 @@ type Band {
 type Query {
   bands(limit: Int): [Band]!
   band(id: ID!): Band
+}
+
+input MemberFields {
+  artist: ID!
+}
+
+input CreateBandFields {
+  name: String!
+  members: [MemberFields]
+  genresIds: [ID]
+  origin: String
+  website: String
+}
+
+type Mutation {
+  createBand(createBandFields: CreateBandFields!): Band!
 }

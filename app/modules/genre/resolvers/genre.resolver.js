@@ -9,6 +9,11 @@ const genreResolver = {
       return dataSources.genreService.getGenre(id)
     },
   },
+  Mutation: {
+    createGenre: async (_, { createGenreFields }, { dataSources }) => {
+      return dataSources.genreService.createGenre(createGenreFields)
+    },
+  },
   Genre: {
     id: getId,
   }

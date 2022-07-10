@@ -34,6 +34,10 @@ class UserService extends RESTDataSource {
       { email, password }, // request body
     )
 
+    if (!res) {
+      throw new AuthenticationError('can\'t find email')
+    }
+
     // empty obj to be able to destruct jwt from it in next step
     return res || {}
   }

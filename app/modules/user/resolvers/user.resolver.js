@@ -5,6 +5,9 @@ const userResolver = {
     user: async (_, { id }, { dataSources }) => {
       return dataSources.userService.getUser(id)
     },
+    jwt: async (_, { email, password }, { dataSources }) => {
+      return dataSources.userService.loginUser(email, password)
+    },
   },
   Mutation: {
     registerUser: async (_, { registerUserFields }, { dataSources }) => {

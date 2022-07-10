@@ -8,6 +8,15 @@ class AlbumService extends RESTDataSource {
     this.baseURL = process.env.ALBUMS_URL
   }
 
+  willSendRequest(request) {
+    if (this.context.token) {
+      request.headers.set(
+        'Authorization',
+        `Bearer ${this.context.token}`
+      )
+    }
+  }
+
   async getAlbums(limit = 5) {
     const res = await this.get('', { limit })
     
@@ -22,6 +31,19 @@ class AlbumService extends RESTDataSource {
     const res = await this.get(`/${id}`)
 
     return res || null
+  }
+
+  async createAlbum(fields) {
+    if (!this.context.token) {
+      throw new AuthenticationError('you must login firstly')
+    }
+
+    const res = await this.post(
+      '', // path
+      fields, // request body
+    )
+
+    return res
   }
 }
 

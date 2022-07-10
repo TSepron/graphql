@@ -12,6 +12,7 @@ type JWT {
 
 type Query {
   user(id: ID!): User
+  jwt(email: String!, password: String!): JWT
 }
 
 input RegisterUserFields {

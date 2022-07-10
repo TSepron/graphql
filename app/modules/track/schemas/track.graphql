@@ -13,3 +13,17 @@ type Query {
   tracks(limit: Int): [Track]!
   track(id: ID!): Track
 }
+
+input CreateTrackFields {
+    title: String!
+    albumId: ID
+    bandsIds: [ID]
+    artistsIds: [ID]
+    duration: Int
+    released: Int
+    genresIds: [ID]
+}
+
+type Mutation {
+  createTrack(createTrackFields: CreateTrackFields!): Track!
+}
