@@ -14,6 +14,14 @@ type Query {
   user(id: ID!): User
 }
 
+input RegisterUserFields {
+  firstName: String
+  lastName: String!
+  password: String!
+  email: String!
+}
+
 type Mutation {
+  registerUser(registerUserFields: RegisterUserFields!): User
   loginUser(email: String!, password: String!): JWT
 }

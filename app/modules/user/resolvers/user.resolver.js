@@ -7,6 +7,9 @@ const userResolver = {
     },
   },
   Mutation: {
+    registerUser: async (_, { registerUserFields }, { dataSources }) => {
+      return dataSources.userService.registerUser(registerUserFields)
+    },
     loginUser: async (_, { email, password }, { dataSources }) => {
       return dataSources.userService.loginUser(email, password)
     },

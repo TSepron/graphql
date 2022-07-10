@@ -19,6 +19,15 @@ class UserService extends RESTDataSource {
     return res || null
   }
 
+  async registerUser(registerUserFields) {
+    const res = await this.post(
+      '/register', // path
+      { ...registerUserFields }, // request body
+    )
+
+    return res
+  }
+
   async loginUser(email, password) {
     const res = await this.post(
       '/login', // path
