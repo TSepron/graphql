@@ -1,7 +1,13 @@
 const { ApolloServer } = require('apollo-server')
+const {
+  ApolloServerPluginLandingPageLocalDefault
+} = require('apollo-server-core')
+const httpHeadersPlugin = require("apollo-server-plugin-http-headers")
 const { albumResolver } = require('./modules/album/resolvers/album.resolver')
 const { AlbumService } = require('./modules/album/services/band.services')
-const { artistResolver } = require('./modules/artist/resolvers/artist.resolver')
+const { 
+  artistResolver 
+} = require('./modules/artist/resolvers/artist.resolver')
 const { ArtistService } = require('./modules/artist/services/artist.services')
 const { bandResolver } = require('./modules/band/resolvers/band.resolver')
 const { BandService } = require('./modules/band/services/band.services')
@@ -12,6 +18,7 @@ const { TrackService } = require('./modules/track/services/track.services')
 const { userResolver } = require('./modules/user/resolvers/user.resolver')
 const { UserService } = require('./modules/user/services/user.services')
 const { getTypeDefs } = require('./typeDefs')
+const { parseCookie } = require('./utils')
 require('dotenv').config()
 
 async function startGraphQLServer() {
@@ -29,9 +36,19 @@ async function startGraphQLServer() {
     ],
     csrfPrevention: true,
     cache: 'bounded',
-    context: ({ req }) => ({
-      token: req.headers.authorization
-    }),
+    plugins: [
+      httpHeadersPlugin,
+      ApolloServerPluginLandingPageLocalDefault({ embed: true })
+    ],
+    context: ({ req }) => {
+      const { jwt } = parseCookie(req.headers.cookie)
+
+      return {
+        token: jwt,
+        setCookies: [],
+        setHeaders: [],
+      }
+    },
     dataSources: () => {
       return {
         bandService: new BandService(),

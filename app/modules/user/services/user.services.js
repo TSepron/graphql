@@ -25,14 +25,20 @@ class UserService extends RESTDataSource {
       { email, password }, // request body
     )
 
-    // empty obj to can destruct jwt from it in next step
+    // empty obj to be able to destruct jwt from it in next step
     return res || {}
   }
 
-  async getJWT(jwt) {
+  async saveJWT(jwt) {
     if (!jwt) {
       throw new AuthenticationError('email or password is incorrect')
     }
+
+    // don't work hm...
+    // this.context.setHeaders.push({ key: 'accessToken', value: "Bearer 71D50F9987529" })
+    // console.log(this.context.setHeaders)
+
+    this.context.setCookies.push({ name: 'jwt', value: jwt })
 
     return jwt
   }

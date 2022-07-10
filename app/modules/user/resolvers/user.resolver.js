@@ -16,7 +16,7 @@ const userResolver = {
   },
   JWT: {
     jwt: async ({ jwt }, __, { dataSources }) => {
-      return dataSources.userService.getJWT(jwt)
+      return dataSources.userService.saveJWT(jwt)
     }
   }
 }
