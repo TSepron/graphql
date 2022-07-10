@@ -28,7 +28,16 @@ input CreateBandFields {
   website: String
 }
 
+input UpdateBandFields {
+  name: String
+  members: [MemberFields]
+  genresIds: [ID]
+  origin: String
+  website: String
+}
+
 type Mutation {
   createBand(createBandFields: CreateBandFields!): Band!
   deleteBand(bandId: ID!): Band!
+  updateBand(bandId: ID!, updateBandFields: UpdateBandFields!): Band!
 }

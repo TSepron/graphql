@@ -1,6 +1,5 @@
 const { RESTDataSource } = require('apollo-datasource-rest')
-const { UserInputError } = require('apollo-server')
-
+const { AuthenticationError, UserInputError } = require('apollo-server')
 
 class AlbumService extends RESTDataSource {
   constructor() {
@@ -71,6 +70,21 @@ class AlbumService extends RESTDataSource {
     }
 
     return album
+  }
+
+  async updateAlbum(id, fields) {
+    this._checkToken()
+
+    const res = await this.put(`/${id}`, fields)
+
+    if (!res) {
+      throw new UserInputError(
+        'can\'t update album which doesn\'t '
+        + 'exist, try another id'
+      )
+    }
+
+    return res
   }
 }
 

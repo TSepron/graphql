@@ -24,7 +24,18 @@ input CreateTrackFields {
     genresIds: [ID]
 }
 
+input UpdateTrackFields {
+    title: String
+    albumId: ID
+    bandsIds: [ID]
+    artistsIds: [ID]
+    duration: Int
+    released: Int
+    genresIds: [ID]
+}
+
 type Mutation {
   createTrack(createTrackFields: CreateTrackFields!): Track!
   deleteTrack(trackId: ID!): Track!
+  updateTrack(trackId: ID!, updateTrackFields: UpdateTrackFields!): Track!
 }

@@ -24,7 +24,18 @@ input CreateAlbumFields {
   image: String
 }
 
+input UpdateAlbumFields {
+  name: String
+  released: Int
+  artistsIds: [ID]
+  bandsIds: [ID]
+  trackIds: [ID]
+  genresIds: [ID]
+  image: String
+}
+
 type Mutation {
   createAlbum(createAlbumFields: CreateAlbumFields!): Album!
   deleteAlbum(albumId: ID!): Album!
+  updateAlbum(albumId: ID!, updateAlbumFields: UpdateAlbumFields!): Album!
 }

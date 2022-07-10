@@ -18,7 +18,15 @@ input CreateGenreFields {
   year: Int
 }
 
+input UpdateGenreFields {
+  name: String
+  description: String
+  country: String
+  year: Int
+}
+
 type Mutation {
   createGenre(createGenreFields: CreateGenreFields!): Genre!
   deleteGenre(genreId: ID!): Genre!
+  updateGenre(genreId: ID!, updateGenreFields: UpdateGenreFields!): Genre!
 }

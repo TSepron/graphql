@@ -26,7 +26,19 @@ input CreateArtistFields {
     instruments: [String]
 }
 
+input UpdateArtistFields {
+  firstName: String
+  secondName: String
+  middleName: String
+  birthDate: String
+  birthPlace: String
+  country: String
+  bandsIds: [ID]
+  instruments: [String]
+}
+
 type Mutation {
   createArtist(createArtistFields: CreateArtistFields!): Artist!
   deleteArtist(artistId: ID!): Artist!
+  updateArtist(artistId: ID!, updateArtistFields: UpdateArtistFields!): Artist!
 }

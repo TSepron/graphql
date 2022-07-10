@@ -16,6 +16,9 @@ const trackResolver = {
     deleteTrack: async (_, { trackId }, { dataSources }) => {
       return dataSources.trackService.deleteTrack(trackId)
     },
+    updateTrack: async (_, { trackId, updateTrackFields }, { dataSources }) => {
+      return dataSources.trackService.updateTrack(trackId, updateTrackFields)
+    },
   },
   Track: {
     id: getId,

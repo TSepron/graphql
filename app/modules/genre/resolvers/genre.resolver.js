@@ -16,6 +16,9 @@ const genreResolver = {
     deleteGenre: async (_, { genreId }, { dataSources }) => {
       return dataSources.genreService.deleteGenre(genreId)
     },
+    updateGenre: async (_, { genreId, updateGenreFields }, { dataSources }) => {
+      return dataSources.genreService.updateGenre(genreId, updateGenreFields)
+    },
   },
   Genre: {
     id: getId,

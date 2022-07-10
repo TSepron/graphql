@@ -3,7 +3,6 @@ const { getId } = require("../../../utils")
 const bandResolver = {
   Query: {
     bands: async (_, { limit, token }, { dataSources }) => {
-      console.log(token)
       return dataSources.bandService.getBands(limit)
     },
     band: async (_, { id }, { dataSources }) => {
@@ -16,6 +15,9 @@ const bandResolver = {
     },
     deleteBand: async (_, { bandId }, { dataSources }) => {
       return dataSources.bandService.deleteBand(bandId)
+    },
+    updateBand: async (_, { bandId, updateBandFields }, { dataSources }) => {
+      return dataSources.bandService.updateBand(bandId, updateBandFields)
     },
   },
   Band: {

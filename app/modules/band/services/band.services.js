@@ -73,6 +73,21 @@ class BandService extends RESTDataSource {
 
     return band
   }
+
+  async updateBand(id, fields) {
+    this._checkToken()
+
+    const res = await this.put(`/${id}`, fields)
+
+    if (!res) {
+      throw new UserInputError(
+        'can\'t update band which doesn\'t '
+        + 'exist, try another id'
+      )
+    }
+
+    return res
+  }
 }
 
 module.exports = {

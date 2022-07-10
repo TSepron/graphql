@@ -1,5 +1,5 @@
 const { RESTDataSource } = require('apollo-datasource-rest')
-const { UserInputError } = require('apollo-server')
+const { AuthenticationError, UserInputError } = require('apollo-server')
 
 class TrackService extends RESTDataSource {
   constructor() {
@@ -70,6 +70,21 @@ class TrackService extends RESTDataSource {
     }
 
     return track
+  }
+
+  async updateTrack(id, fields) {
+    this._checkToken()
+
+    const res = await this.put(`/${id}`, fields)
+
+    if (!res) {
+      throw new UserInputError(
+        'can\'t update track which doesn\'t '
+        + 'exist, try another id'
+      )
+    }
+
+    return res
   }
 }
 

@@ -16,6 +16,9 @@ const artistResolver = {
     deleteArtist: async (_, { artistId }, { dataSources }) => {
       return dataSources.artistService.deleteArtist(artistId)
     },
+    updateArtist: async (_, { artistId, updateArtistFields }, { dataSources }) => {
+      return dataSources.artistService.updateArtist(artistId, updateArtistFields)
+    },
   },
   Artist: {
     id: getId,
